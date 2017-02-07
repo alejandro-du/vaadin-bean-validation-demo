@@ -21,17 +21,21 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         Label title = new Label("Register new Meetup");
         title.addStyleName(ValoTheme.LABEL_H2);
+        Label error = new Label();
+        error.addStyleName(ValoTheme.LABEL_FAILURE);
         Button save = new Button("Save", e -> save());
+        save.addStyleName(ValoTheme.BUTTON_PRIMARY);
 
-        FormLayout layout = new FormLayout(title, name, start, end, save);
+        FormLayout layout = new FormLayout(title, error, name, start, end, save);
         layout.setMargin(true);
         setContent(layout);
+
+        binder.setStatusLabel(error);
+        binder.setBean(meetup);
+        binder.bindInstanceFields(this);
     }
 
     private void save() {
-        binder.setBean(meetup);
-        binder.bindInstanceFields(this);
-
         if (binder.validate().isOk()) {
             Notification.show("Meetup saved: " + meetup);
         }

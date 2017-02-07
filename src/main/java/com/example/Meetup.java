@@ -1,16 +1,15 @@
 package com.example;
 
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
  * @author Alejandro Duarte
  */
+@ConsistentDateRange
 public class Meetup {
 
-    @NotNull
-    @Size(min = 3)
+    @Size(min = 3, max = 512)
     private String name;
 
     private LocalDate start;
